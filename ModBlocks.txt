@@ -1,0 +1,6 @@
+public class ModBlocks {
+
+    @GameRegistry.ObjectHolder("modtut:EkuFBlock")
+    public static EkuFBlock ekuFBlock;
+
+}

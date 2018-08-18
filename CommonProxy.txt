@@ -1,0 +1,17 @@
+@Mod.EventBusSubscriber
+public class CommonProxy {
+
+    ...
+
+    @SubscribeEvent
+    public static void registerBlocks(RegistryEvent.Register<Block> event) {
+        event.getRegistry().register(new EkuFBlock());
+    }
+
+    @SubscribeEvent
+    public static void registerItems(RegistryEvent.Register<Item> event) {
+        event.getRegistry().register(new ItemBlock(ModBlocks.ekuFBlock).setRegistryName(ModBlocks.ekuFBlock.getRegistryName()));
+		event.getRegistry().register(new EkuFItem());
+    }
+
+}

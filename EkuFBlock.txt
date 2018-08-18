@@ -1,0 +1,11 @@
+public class EkuFBlock{
+
+	public EkuFBlock(){
+
+		super(Material.ROCK);
+		setUnlocalizedName(ModTut.MODID + ".ekufblock");
+		setRegistryName("ekufblock");
+
+    }
+
+}
