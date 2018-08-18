@@ -1,4 +1,4 @@
-public class EkuFBlock{
+public class EkuFBlock extends Block{
 
 	public EkuFBlock(){
 
