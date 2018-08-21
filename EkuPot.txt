@@ -1,48 +1,101 @@
-public class EkuPot extends Block implements ITileEntityProvider{
+public class EkuPot extends Container {
 
-	public static final int GUI_ID = 1;
+	private EkuPotTileEntity te;
 
-	public EkuPot(){
+	public EkuPot(IInventory playerInventory, EkuPotTileEntity te){
 	
-		super(material.ROCK);
-		setUnlocalizedName(EkusMods.MODID + ".ekupot");
-		setRegistryName("ekupot");
+		this.te = te
+		addOwnslots();
+		addPlayerSlots(playerInventory);
 	
 	}
 
-	@SideOnly(Side.CLIENT)
-	public void initModel(){
-	
-		ModelLoader.setCustomResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
+	private void addPlayerSlots(IInventory playerInventory) {
+        
+        for (int row = 0; row < 3; ++row) {
 
-	}
+            for (int col = 0; col < 9; ++col) {
 
-	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta){
-	
-		return new EkuPotTileEntity();
+                int x = 9 + col * 18;
+                int y = row * 18 + 70;
+                this.addSlotToContainer(new Slot(playerInventory, col + row * 9 + 10, x, y));
 
-	}
+            }
 
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state,EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-	
-		if(world.isRemote){
-		
-			return true;
-		
-		}
-	
-		TileEntity te = world.getTileEntity(pos);
-		if(!(te instanceof EkuPotTileEntity)){
-		
-			return false;
-		
-		}
+        }
 
-		player.openGui(EkusMods.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
-		return true;
+		for (int row = 0; row < 9; ++row) {
 
-	}
+            int x = 9 + row * 18;
+            int y = 58 + 70;
+            this.addSlotToContainer(new Slot(playerInventory, row, x, y));
+
+        }
+
+    }
+
+	private void addOwnSlots() {
+
+		IItemHandler itemHandler = this.te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        int x = 9;
+        int y = 6;
+
+        int slotIndex = 0;
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
+
+            addSlotToContainer(new SlotItemHandler(itemHandler, slotIndex, x, y));
+            slotIndex++;
+            x += 18;
+
+        }
+    }
+
+	@Nullable
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+        ItemStack itemstack = null;
+        Slot slot = this.inventorySlots.get(index);
+
+        if (slot != null && slot.getHasStack()) {
+
+            ItemStack itemstack1 = slot.getStack();
+            itemstack = itemstack1.copy();
+
+            if (index < TestContainerTileEntity.SIZE) {
+
+                if (!this.mergeItemStack(itemstack1, EkuPotTileEntity.SIZE, this.inventorySlots.size(), true)) {
+
+                    return null;
+
+                }
+
+            } else if (!this.mergeItemStack(itemstack1, 0, EkuPotTileEntity.SIZE, false)) {
+
+                return null;
+
+            }
+
+            if (itemstack1.isEmpty()) {
+
+                slot.putStack(ItemStack.EMPTY);
+
+            } else {
+
+                slot.onSlotChanged();
+
+            }
+
+        }
+
+        return itemstack;
+
+    }
+
+    @Override
+    public boolean canInteractWith(EntityPlayer playerIn) {
+
+        return te.canInteractWith(playerIn);
+
+    }
 
 }
