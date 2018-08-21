@@ -3,4 +3,13 @@ public class ModBlocks {
     @GameRegistry.ObjectHolder("modtut:EkuFBlock")
     public static EkuFBlock ekuFBlock;
 
+	public static EkuPot ekuPot;
+
+    @SideOnly(Side.CLIENT)
+    public static void initModels() {
+
+        ekuPot.initModel();
+
+    }
+
 }

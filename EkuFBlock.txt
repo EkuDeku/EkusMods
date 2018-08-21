@@ -3,7 +3,7 @@ public class EkuFBlock extends Block{
 	public EkuFBlock(){
 
 		super(Material.ROCK);
-		setUnlocalizedName(ModTut.MODID + ".ekufblock");
+		setUnlocalizedName(EkusMods.MODID + ".ekufblock");
 		setRegistryName("ekufblock");
 
     }

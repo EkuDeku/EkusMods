@@ -6,12 +6,15 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().register(new EkuFBlock());
+		event.getRegistry().register(new EkuPot());
+        GameRegistry.registerTileEntity(EkuPotTileEntity.class, EkusMods.MODID + "_ekupot");
     }
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(new ItemBlock(ModBlocks.ekuFBlock).setRegistryName(ModBlocks.ekuFBlock.getRegistryName()));
 		event.getRegistry().register(new EkuFItem());
+		event.getRegistry().register(new ItemBlock(ModBlocks.ekuPot).setRegistryName(ModBlocks.ekuPot.getRegistryName()));
     }
 
 }
