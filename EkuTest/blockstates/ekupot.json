@@ -2,7 +2,7 @@
   "forge_marker": 1,
   "defaults": {
     "model": "cube_all",
-    textures: { "all":"ekusmods:blocks/ekupot"}
+    textures: { "all":"ekutest:blocks/ekupot"}
   },
   "variants": {
     "normal": [{}],

@@ -1,6 +1,6 @@
 public class ModItems {
 
-    @GameRegistry.ObjectHolder("modtut:ekufitem")
+    @GameRegistry.ObjectHolder("ekutest:ekufitem")
     public static EkuFItem ekufitem;
 
 }

@@ -40,7 +40,7 @@ public class EkuPotBlock extends Block implements ITileEntityProvider{
 		
 		}
 
-		player.openGui(EkusMods.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
+		player.openGui(EkuTest.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 
 	}
