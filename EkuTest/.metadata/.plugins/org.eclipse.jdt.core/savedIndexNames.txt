@@ -1,0 +1,2 @@
+INDEX VERSION 1.129+C:\Users\Ekuman\Desktop\ModMadeByMe\Git\EkusMods\EkuTest\.metadata\.plugins\org.eclipse.jdt.core
+2714796930.index
